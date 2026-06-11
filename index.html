@@ -12,7 +12,6 @@
     overflow: hidden;
     font-family: sans-serif;
   }
-  /* palco fixo 960x540 (mesma proporcao do ppt) escalado pra caber na tela */
   #viewport {
     position: fixed; inset: 0;
     display: flex; align-items: center; justify-content: center;
@@ -34,25 +33,34 @@
     width: 960px; height: 540px;
     user-select: none; -webkit-user-drag: none; pointer-events: none;
   }
-  /* quadros cumulativos da tela 1 (cross-fade) */
-  .frame {
-    position: absolute; inset: 0;
-    width: 960px; height: 540px;
+  /* elementos da tela 1 que entram em sequencia */
+  .el {
+    position: absolute;
     opacity: 0;
     user-select: none; -webkit-user-drag: none; pointer-events: none;
   }
-  #f00 { opacity: 1; }                 /* base: fundo + botao, sempre visivel */
-  #stage.play .frame { animation: fadein 1000ms ease forwards; }
-  #stage.play #f01 { animation-delay: 0ms; }
-  #stage.play #f02 { animation-delay: 1000ms; }
-  #stage.play #f03 { animation-delay: 2000ms; }
-  #stage.play #f04 { animation-delay: 3000ms; }
-  #stage.play #f05 { animation-delay: 4000ms; }
-  #stage.play #f06 { animation-delay: 5000ms; }
-  #stage.play #f07 { animation-delay: 6000ms; }
-  #stage.play #f08 { animation-delay: 7000ms; }
-  #stage.play #f09 { animation-delay: 8000ms; }
-  #stage.play #f10 { animation-delay: 9000ms; }
+  #stage.play .el { animation: fadein 1000ms ease forwards; }
+  /* fotos (formam o coracao) */
+  #p1 { left: 409.57px; top: 64.93px;  width: 174.76px; height: 98.30px;  }
+  #p2 { left: 204.31px; top: 0px;      width: 145.38px; height: 114.40px; }
+  #p3 { left: 29.20px;  top: 127.13px; width: 145.38px; height: 173.29px; transform: rotate(-7.61deg);  }
+  #p4 { left: 217.91px; top: 322.56px; width: 145.38px; height: 139.28px; transform: rotate(-12.01deg); }
+  #p5 { left: 411.38px; top: 385.40px; width: 145.38px; height: 145.38px; }
+  #p6 { left: 604.86px; top: 315.78px; width: 145.38px; height: 139.27px; transform: rotate(13.41deg);  }
+  #p7 { left: 777.49px; top: 151.00px; width: 124.00px; height: 164.79px; transform: rotate(10.64deg);  }
+  #p8 { left: 651.79px; top: 18.01px;  width: 145.38px; height: 109.13px; }
+  /* bloco de texto + coracoezinhos + setinha (aparece no fim) */
+  #tb { left: 189.75px; top: 163.50px; width: 588px; height: 154.50px; }
+  /* tempos de entrada (cada um leva 1s; igual ao ppt) */
+  #stage.play #p1 { animation-delay: 0ms; }
+  #stage.play #p2 { animation-delay: 1000ms; }
+  #stage.play #p3 { animation-delay: 2000ms; }
+  #stage.play #p4 { animation-delay: 3000ms; }
+  #stage.play #p5 { animation-delay: 4000ms; }
+  #stage.play #p6 { animation-delay: 5000ms; }
+  #stage.play #p7 { animation-delay: 6000ms; }
+  #stage.play #p8 { animation-delay: 7000ms; }
+  #stage.play #tb { animation-delay: 8000ms; }
   @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
   /* areas clicaveis (invisiveis, por cima dos botoes desenhados no ppt) */
   .hotspot {
@@ -72,19 +80,18 @@
 <div id="viewport">
   <div id="stage">
 
-    <!-- TELA 1: 8 fotos formam o coracao, depois o texto e a setinha -->
+    <!-- TELA 1: fundo + botao (sempre visiveis), fotos formam o coracao, depois o texto -->
     <section class="slide active" id="slide1">
-      <img class="frame" id="f00" src="assets/frame00.png" alt="">
-      <img class="frame" id="f01" src="assets/frame01.png" alt="">
-      <img class="frame" id="f02" src="assets/frame02.png" alt="">
-      <img class="frame" id="f03" src="assets/frame03.png" alt="">
-      <img class="frame" id="f04" src="assets/frame04.png" alt="">
-      <img class="frame" id="f05" src="assets/frame05.png" alt="">
-      <img class="frame" id="f06" src="assets/frame06.png" alt="">
-      <img class="frame" id="f07" src="assets/frame07.png" alt="">
-      <img class="frame" id="f08" src="assets/frame08.png" alt="">
-      <img class="frame" id="f09" src="assets/frame09.png" alt="">
-      <img class="frame" id="f10" src="assets/frame10.png" alt="">
+      <img class="bg" src="assets/frame00.png" alt="">
+      <img class="el" id="p1" src="assets/p1.jpg" alt="">
+      <img class="el" id="p2" src="assets/p2.png" alt="">
+      <img class="el" id="p3" src="assets/p3.jpg" alt="">
+      <img class="el" id="p4" src="assets/p4.jpg" alt="">
+      <img class="el" id="p5" src="assets/p5.png" alt="">
+      <img class="el" id="p6" src="assets/p6.png" alt="">
+      <img class="el" id="p7" src="assets/p7.jpg" alt="">
+      <img class="el" id="p8" src="assets/p8.jpg" alt="">
+      <img class="el" id="tb" src="assets/textblock.png" alt="">
       <button class="hotspot" id="hsNext" aria-label="proxima pagina" onclick="go(2)"></button>
     </section>
 
@@ -120,10 +127,11 @@
     document.getElementById('slide' + n).classList.add('active');
   }
 
-  // dispara as animacoes da tela 1 ao abrir
-  window.addEventListener('load', function () {
-    requestAnimationFrame(function () { stage.classList.add('play'); });
-  });
+  // dispara as animacoes da tela 1: quando carregar, ou no maximo em 2.5s
+  var started = false;
+  function start() { if (started) return; started = true; stage.classList.add('play'); }
+  window.addEventListener('load', start);
+  setTimeout(start, 2500);
 </script>
 </body>
 </html>
