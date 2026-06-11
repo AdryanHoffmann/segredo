@@ -50,7 +50,9 @@
   #p7 { left: 777.49px; top: 151.00px; width: 124.00px; height: 164.79px; transform: rotate(10.64deg);  }
   #p8 { left: 651.79px; top: 18.01px;  width: 145.38px; height: 109.13px; }
   /* bloco de texto + coracoezinhos + setinha (aparece no fim) */
-  #tb { left: 189.75px; top: 163.50px; width: 588px; height: 154.50px; }
+  #tb { left: 189.75px; top: 162.75px; width: 555px; height: 142.50px; }
+  /* botao "proxima pagina" (aparece depois do texto) */
+  #btn { left: 767.25px; top: 480px; width: 162.75px; height: 52.50px; }
   /* tempos de entrada (cada um leva 1s; igual ao ppt) */
   #stage.play #p1 { animation-delay: 0ms; }
   #stage.play #p2 { animation-delay: 1000ms; }
@@ -60,7 +62,8 @@
   #stage.play #p6 { animation-delay: 5000ms; }
   #stage.play #p7 { animation-delay: 6000ms; }
   #stage.play #p8 { animation-delay: 7000ms; }
-  #stage.play #tb { animation-delay: 8000ms; }
+  #stage.play #tb  { animation-delay: 8000ms; }
+  #stage.play #btn { animation-delay: 9000ms; }
   @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
   /* areas clicaveis (invisiveis, por cima dos botoes desenhados no ppt) */
   .hotspot {
@@ -82,7 +85,6 @@
 
     <!-- TELA 1: fundo + botao (sempre visiveis), fotos formam o coracao, depois o texto -->
     <section class="slide active" id="slide1">
-      <img class="bg" src="assets/frame00.png" alt="">
       <img class="el" id="p1" src="assets/p1.jpg" alt="">
       <img class="el" id="p2" src="assets/p2.png" alt="">
       <img class="el" id="p3" src="assets/p3.jpg" alt="">
@@ -92,6 +94,7 @@
       <img class="el" id="p7" src="assets/p7.jpg" alt="">
       <img class="el" id="p8" src="assets/p8.jpg" alt="">
       <img class="el" id="tb" src="assets/textblock.png" alt="">
+      <img class="el" id="btn" src="assets/button.png" alt="">
       <button class="hotspot" id="hsNext" aria-label="proxima pagina" onclick="go(2)"></button>
     </section>
 
